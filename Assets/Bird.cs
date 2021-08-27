@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class Bird : MonoBehaviour
 {
     // 鳥のプレハブを格納する配列
@@ -18,7 +18,9 @@ public class Bird : MonoBehaviour
     private GameObject lastBird;
     private string currentName;
     List<GameObject> removableBirdList = new List<GameObject>();
-
+    //終了までの時間
+    private float counttime = 0.0f; //時間を測る
+    private float timeLimit = 30.0f;　//制限時間
     // Start is called before the first frame update
     void Start()
     {
@@ -93,7 +95,10 @@ public class Bird : MonoBehaviour
             lastBird = null;
         };
         StartCoroutine(DropBirds(50));
-    }
+
+     
+
+}
     private void PushToBirdList(GameObject obj)
     {
         removableBirdList.Add(obj);
@@ -128,11 +133,16 @@ public class Bird : MonoBehaviour
     }
 
 
-
+    
 
     // Update is called once per frame
     void Update()
     {
+        counttime += Time.deltaTime; //時間を足す
 
+        if(counttime > timeLimit)
+        {
+            SceneManager.LoadScene("END");
+        }
     }
 }
