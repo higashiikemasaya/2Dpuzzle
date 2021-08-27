@@ -65,10 +65,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Bird.cs" />
+    <Compile Include="Assets\Countdown.cs" />
     <Compile Include="Assets\GameManegya.cs" />
     <Compile Include="Assets\GameSystem.cs" />
     <Compile Include="Assets\TouchManager.cs" />
-    <Compile Include="Assets\endtime.cs" />
     <Compile Include="Assets\restrat.cs" />
     <Compile Include="Assets\test.cs" />
     <Reference Include="UnityEngine">
