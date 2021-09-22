@@ -22,12 +22,18 @@ public class Bird : MonoBehaviour
     //終了までの時間
     private float counttime = 0.0f; //時間を測る
     private float timeLimit = 30.0f;　//制限時間
+    //SE
+    public AudioClip SE;
+    AudioSource audioSource;
+    float SS = 0.0f;
 
     // Start is called before the first frame update
     void Start()
     {
         TouchManager.Began += (info) =>
         {
+            audioSource = GetComponent<AudioSource>();
+
             // クリック地点でヒットしているオブジェクトを取得
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(info.screenPoint),
                 Vector2.zero);
@@ -84,6 +90,7 @@ public class Bird : MonoBehaviour
                 foreach (GameObject obj in removableBirdList)
                 {
                     Destroy(obj);
+                    SS = 1.0f;
                 }
                 // 補充
                 StartCoroutine(DropBirds(removeCount));
@@ -145,5 +152,10 @@ public class Bird : MonoBehaviour
             SceneManager.LoadScene("END");
         }
 
+        if (SS > 0.1f)
+        {
+            audioSource.PlayOneShot(SE);
+            SS = 0.0f;
+        }
     }
 }
